@@ -6,11 +6,15 @@ import {
 	Button,
 	TextInput,
 	TouchableOpacity,
+	FlatList,
+	ScrollView,
 } from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const HomeScreen = ({navigation}) => {
-	const [tasks, setTasks] = useState([]);
+	const [tasks, setTasks] = useState([
+		{task: "hello there", id: 23, checked: true}
+	]);
 	const [task, setTask] = useState("");
 
 	const handleLogOut = () => {
@@ -18,7 +22,7 @@ const HomeScreen = ({navigation}) => {
 	}
 	const addTask = (value) => {
 		let task = {
-			text: value,
+			task: value,
 			id: new Date(),
 			checked: false,
 		}
@@ -26,10 +30,23 @@ const HomeScreen = ({navigation}) => {
 		setTask("")
 	}
 
+	const renderItem = ({item}) => {
+		<View>
+			<Text>{item.task}</Text>
+		</View>
+	}
 	return (
 		<View style={styles.container}>
 			<View style={styles.tasksContainer}>
-				<Text>hello</Text>
+				<FlatList
+					data={tasks}
+					renderItem={({ item }) => (
+						<View>
+							<Text>{item.task}</Text>
+						</View>
+					)}
+					keyExtractor={(item)=>item.id}
+				/>
 			</View>
 			<View style={styles.inputContainer}>
 				<TextInput 
