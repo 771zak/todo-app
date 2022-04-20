@@ -61,6 +61,10 @@ const HomeScreen = ({navigation}) => {
 					<Icon name="plus-circle" color="pink" size={40} />
 				</TouchableOpacity>
 			</View>
+			<Button 
+				title="logout"
+				onPress={handleLogOut}
+			/>
 		</View>
 	)
 }
